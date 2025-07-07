@@ -1,0 +1,24 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saugat1070/todo_api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saugat1070/todo_api/issues"
+  },
+  "homepage": "https://github.com/saugat1070/todo_api#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
