@@ -3,7 +3,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import User from "./userModel.js";
+import User from "./src/Model/userModel.js"
+
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -20,8 +21,11 @@ mongoose.connect(process.env.DB_URL
     console.log("Something error on database connectioni");
 })
 
-app.post("/",async(req,res)=>{
+app.post("/",async (req,res)=>{
+    console.log("yes")
     const {email,password,fullName} = req.body;
+    console.log(email,password,fullName);
+    // console.log(...req.body)
     const userCreate = await User.create({
         ...req.body
     })
@@ -42,3 +46,8 @@ app.listen(3000, () => {
 });
 
 // https://github.com/saugat1070
+
+
+// modelName.create() //
+// modelName.find() //
+// modelName.update()
