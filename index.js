@@ -21,25 +21,25 @@ mongoose.connect(process.env.DB_URL
     console.log("Something error on database connectioni");
 })
 
-app.post("/",async (req,res)=>{
-    console.log("yes")
-    const {email,password,fullName} = req.body;
-    console.log(email,password,fullName);
-    // console.log(...req.body)
-    const userCreate = await User.create({
-        ...req.body
-    })
-    if(!userCreate){
-        res.json({
-            message : "failed in creation during database"
-        });
-        return;
-    }
-    res.json({
-        message : "user register successfull"
-    })
+// app.post("/",async (req,res)=>{
+//     console.log("yes")
+//     const {email,password,fullName} = req.body;
+//     console.log(email,password,fullName);
+//     // console.log(...req.body)
+//     const userCreate = await User.create({
+//         ...req.body
+//     })
+//     if(!userCreate){
+//         res.json({
+//             message : "failed in creation during database"
+//         });
+//         return;
+//     }
+//     res.json({
+//         message : "user register successfull"
+//     })
 
-})
+// })
 
 app.listen(3000, () => {
   console.log(`server is run at 3000`);
