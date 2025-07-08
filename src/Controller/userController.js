@@ -26,3 +26,5 @@ const userRegister = async (req,res)=>{
         message : "user register succecssfully"
     })
 }
+
+export  {userRegister};
