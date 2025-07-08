@@ -3,8 +3,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import User from "./src/Model/userModel.js"
-
+import userRoute from "./src/Routes/userRoute.js"
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -40,6 +39,9 @@ mongoose.connect(process.env.DB_URL
 //     })
 
 // })
+
+app.use("/api/user",userRoute); //  http://localhost:3000/api/user
+
 
 app.listen(3000, () => {
   console.log(`server is run at 3000`);
