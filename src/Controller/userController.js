@@ -82,10 +82,13 @@ const userLogin = async (req,res)=>{
     })
 }
 
-const fetchProfile = (req,res)=>{
+const fetchProfile = async(req,res)=>{
     const userId = req.user.id;
-     
-
+    const findInformation = await User.findById(userId).select("-password")
+    res.status(200).json({
+        message : "profile fetch success",
+        data : findInformation
+    })
 }
 
 export  {userRegister,userLogin,fetchProfile};
