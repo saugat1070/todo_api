@@ -3,7 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sendMail from "../services/mailSender.js";
 import { registerMail } from "../Static/registerMail.js";
-
+import dotenv from "dotenv";
+dotenv.config()
 
 const userRegister = async (req,res)=>{
     const {email,password,fullName} = req.body;
@@ -71,7 +72,7 @@ const userLogin = async (req,res)=>{
     const token = jwt.sign({
         userId : findUser._id,
         name : findUser.fullName
-    },"hlkahorerajkhoir",{
+    },process.env.JWT_SECRET_KEY,{
         expiresIn:"10d"
     })
 
@@ -81,7 +82,13 @@ const userLogin = async (req,res)=>{
     })
 }
 
-export  {userRegister,userLogin};
+const fetchProfile = (req,res)=>{
+    const userId = req.user.id;
+     
+
+}
+
+export  {userRegister,userLogin,fetchProfile};
 
 
 
