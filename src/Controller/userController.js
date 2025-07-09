@@ -1,6 +1,8 @@
 import User from "../Model/userModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import sendMail from "../services/mailSender.js";
+import { registerMail } from "../Static/registerMail.js";
 
 
 const userRegister = async (req,res)=>{
@@ -24,6 +26,15 @@ const userRegister = async (req,res)=>{
         });
         return;
     }
+
+    const data = {
+        from : "saugatgiri1070@gmail.com",
+        to : email,
+        subject : "Thank you for register",
+        html : registerMail()
+    }
+    sendMail(data);
+
     res.status(200).json({
         message : "user register succecssfully"
     })
