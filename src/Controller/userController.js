@@ -1,4 +1,6 @@
 import User from "../Model/userModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 
 const userRegister = async (req,res)=>{
@@ -13,7 +15,7 @@ const userRegister = async (req,res)=>{
     const createUSer = await User.create({
         fullName : fullName,
         email : email,
-        password : password
+        password : bcrypt.hashSync(password,10)
     })
 
     if(!createUSer){
@@ -27,4 +29,54 @@ const userRegister = async (req,res)=>{
     })
 }
 
-export  {userRegister};
+const userLogin = async (req,res)=>{
+    const {email,password} = req.body;
+    if(!email || !password){
+        res.status(400).json({
+            message : "please enter email and password"
+        });
+        return;
+    }
+
+    const findUser = await User.findOne({
+        email : email
+    });
+
+    if(!findUser){
+        res.status(404).json({
+            message : "user with this email is not found"
+        });
+        return;
+    }
+
+    const checkPassword = bcrypt.compareSync(password,findUser.password);
+    if(!checkPassword){
+        res.status(401).json({
+            message : "password is incorrect"
+        });
+        return;
+    }
+
+    const token = jwt.sign({
+        userId : findUser._id,
+        name : findUser.fullName
+    },"hlkahorerajkhoir",{
+        expiresIn:"10d"
+    })
+
+    res.json({
+        message : "login successfull",
+        token : token
+    })
+}
+
+export  {userRegister,userLogin};
+
+
+
+
+
+
+
+
+
