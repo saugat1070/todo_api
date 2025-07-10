@@ -3,12 +3,15 @@ import { TaskCreate } from "../Controller/taskController.js";
 import { subTaskCreate } from "../Controller/taskController.js";
 import { isLoggin } from "../middleware/authMiddleware.js";
 import upload from "../middleware/multerMiddleware.js";
+import { subtaskEdit } from "../Controller/taskController.js";
+import { deleteSubTask } from "../Controller/taskController.js";
+
 const router = express.Router();
 
 //routes for task creation
 router.route("/create").post(isLoggin,TaskCreate);
 router.route("/:titleId/create").post(isLoggin,upload.single("imageName"),subTaskCreate);
-
+router.route("/subtask/:subtaskId").patch(isLoggin,subtaskEdit).delete(isLoggin,deleteSubTask);
 
 export default router;
 

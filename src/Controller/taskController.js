@@ -69,6 +69,45 @@ export const subTaskCreate = async(req,res)=>{
     })
 }
 
+export const subtaskEdit = async (req,res)=>{
+    const {description} = req.body;
+    const {subtaskId} = req.params;
+    if(!subtaskId){
+        res.status(400).json({
+            message : "please provide subtaskID"
+        });
+        return;
+    }
 
-//http://facebook.com/profile.php?id=61577001926406  --> req.query
-//http://facebook.com/profile.php/61577001926406
+    const findsubTask = await SubTask.findById(subtaskId);
+    if(!findsubTask){
+        res.status(404).json({
+            message : "subtask with this id is not found"
+        });
+        return;
+    }
+    const editSubtask = await SubTask.findByIdAndUpdate({_id:subtaskId},{
+        description : description
+    });
+    res.status(200).json({
+         message : "subtask update successfully"
+    })
+
+}
+
+export const deleteSubTask = async (req,res)=>{
+    const {subtaskId} = req.params;
+    if(!subtaskId){
+        res.status(400).json({
+            message : "please provide subtask id"
+        });
+        return;
+    }
+
+    const deleteSubTask = await SubTask.findByIdAndDelete({_id:subtaskId});
+    res.status(200).json({
+        message : "data delete successfull"
+    })
+}
+
+
