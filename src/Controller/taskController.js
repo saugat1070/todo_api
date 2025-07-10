@@ -1,6 +1,6 @@
-import User from "../Model/userModel";
-import SubTask from "../Model/subtaskModel";
-import Task from "../Model/taskModel";
+import User from "../Model/userModel.js";
+import SubTask from "../Model/subtaskModel.js";
+import Task from "../Model/taskModel.js";
 
 
 export const TaskCreate = async (req,res)=>{
