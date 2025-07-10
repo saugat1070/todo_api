@@ -5,8 +5,8 @@ dotenv.config();
 
 export const isLoggin = (req,res,next)=>{
     const auth = req?.headers?.authorization
+    console.log(auth)
     const token = auth && auth.startsWith("Bearer ") ? auth.split(" ")[1] : auth;
-    console.log(process.env.JWT_SECRET_KEY)
     jwt.verify(token,process.env.JWT_SECRET_KEY,(error,result)=>{
         if(error){
             console.log(error.message);
@@ -17,6 +17,7 @@ export const isLoggin = (req,res,next)=>{
             req.user = {
                 id : result.userId
             }
+            // console.log(req.user)
             next()
         }
     })

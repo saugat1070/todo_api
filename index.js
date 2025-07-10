@@ -1,5 +1,5 @@
-// const express = require("express")
-import express from "express";
+// const express = require("express")  //CommonJs
+import express from "express"; //ES6+
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -17,7 +17,8 @@ app.use(
 mongoose.connect(process.env.DB_URL
 ).then(()=>{
     console.log("DataBase is connected!!");
-}).catch(()=>{
+}).catch((err)=>{
+  console.log(err.message)
     console.log("Something error on database connectioni");
 })
 
@@ -32,4 +33,4 @@ app.listen(3000, () => {
 // https://github.com/saugat1070
 
 
-
+// Model(Database Schema) --> Controller --> Routes --> index.js link

@@ -24,11 +24,11 @@ export const TaskCreate = async (req,res)=>{
         return;
     }
     res.status(200).json({
-        message : "task complete successfull"
+        message : "task create successfull"
     })
 }
 
-export const subTaskCreate = (req,res)=>{
+export const subTaskCreate = async(req,res)=>{
     const {subtitle,description} = req.body;
     if(!subtitle || !description){
         res.status(400).json({
@@ -50,12 +50,13 @@ export const subTaskCreate = (req,res)=>{
         return;
     }
 
-    const subTaskCreate = SubTask.create({
+    const subTaskCreate = await SubTask.create({
         title : titleId,
         subtitle : subtitle,
         description : description,
         image : imageName
     });
+
     if(!subTaskCreate){
         res.json({
             message : "Something fail during subTaskCreation"
@@ -67,3 +68,7 @@ export const subTaskCreate = (req,res)=>{
         message : "subTask created"
     })
 }
+
+
+//http://facebook.com/profile.php?id=61577001926406  --> req.query
+//http://facebook.com/profile.php/61577001926406
